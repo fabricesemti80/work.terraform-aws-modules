@@ -3,9 +3,8 @@
 output "iam_user_summary" {
   value = concat(
     formatlist(
-      "%s - %s - %s",
+      "To return password of user %s run: %s",
       [for user in module.iam_user : user.iam_user_name],
-      [for user in module.iam_user : user.keybase_password_pgp_message],
       [for user in module.iam_user : user.keybase_password_decrypt_command],
     )
   )
