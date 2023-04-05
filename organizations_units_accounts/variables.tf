@@ -1,8 +1,4 @@
-variable "ou_name" {
-  description = "OU name"
-  type        = string
-}
-
+variable "org_root_id" {
 variable "org_root_id" {
   description = "ROOT org id"
   type        = string
