@@ -121,6 +121,9 @@ resource "aws_organizations_account" "account" {
   iam_user_access_to_billing = each.value.allow_iam_users_access_to_billing ? "ALLOW" : "DENY"
 
   parent_id = each.value.parent.id
+  lifecycle {
+    ignore_changes = [iam_user_access_to_billing]
+  }
 }
 
 locals {
