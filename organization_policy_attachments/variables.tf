@@ -50,10 +50,10 @@ variable "policy_description" {
   description = "What the policy does"
 }
 variable "target_ou_ids" {
-  type = map(string)
-  default = {
-    ou1 = "ou-12345"
-    ou2 = "ou-67890"
-  }
+  type = list(string)
+  default = [
+    "ou-12345",
+    "ou-67890"
+  ]
   description = "OU-s to apply the policy to"
 }
