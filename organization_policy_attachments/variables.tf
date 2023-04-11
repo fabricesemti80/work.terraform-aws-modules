@@ -1,3 +1,4 @@
+
 variable "controlled_resources" {
   description = "Resources that the policy will controll"
   type        = list(string)
