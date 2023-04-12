@@ -1,12 +1,12 @@
-variable "allowed_vpc_ids" {
+/* variable "allowed_vpc_ids" {
   type = list(string)
   default = [
-    "vpc-12345678",
-    "vpc-87654321"
+    "vpc-0d96c0705f77979c5",
+    "vpc-00bd735c7460d255c"
   ]
 }
 variable "target_org_unit" {
     type = string
-    default = "root"
+    default = "410852369909"
     description = "(optional) describe your variable"
-}
+} */
