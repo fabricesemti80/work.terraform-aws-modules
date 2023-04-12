@@ -1,4 +1,3 @@
-# Define the VPC IDs that are allowed
 
 
 # Create an SCP that allows access to the allowed VPCs
@@ -12,18 +11,25 @@ resource "aws_organizations_policy" "vpc_policy" {
         "Effect": "Allow",
         "Action": "ec2:*",
         "Resource": [
-          for vpc_id in var.allowed_vpc_ids : "arn:aws:ec2:*:*:vpc/${vpc_id}"
-        ]
+          "arn:aws:ec2:*:*:vpc/${join("/", var.allowed_vpc_ids)}",
+        ],
+    "Condition": {
+        "ArnEquals": {
+            "aws:SourceVpc": [
+            for vpc_id in var.allowed_vpc_ids : "arn:aws:ec2:*:*:vpc/${vpc_id}"
+            ]
+        }
+    }
       },
       {
         "Sid": "AllowAccessToDescribeFunctions",
         "Effect": "Allow",
-        "Action": "ec2:Describe*",
-        "Resource": "*"
+        "Action": "ec2:Describe*"
       }
     ]
   })
 }
+
 
 # Attach the SCP to the root of your AWS organization
 resource "aws_organizations_policy_attachment" "vpc_policy_attachment" {
@@ -45,7 +51,7 @@ resource "aws_organizations_policy" "denied_vpc_policy" {
         "Condition": {
           "StringNotEquals": {
             "aws:sourceVpc": [
-              for vpc_id in var.allowed_vpc_ids : "${vpc_id}"
+              for vpc_id in var.allowed_vpc_ids : "arn:aws:ec2:*:*:vpc/${vpc_id}"
             ]
           }
         }
