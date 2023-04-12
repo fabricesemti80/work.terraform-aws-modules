@@ -11,7 +11,7 @@ resource "aws_organizations_policy" "vpc_policy" {
         "Effect": "Allow",
         "Action": "ec2:*",
         "Resource": [
-          "arn:aws:ec2:*:*:vpc/${join("/", var.allowed_vpc_ids)}",
+          for vpc_id in var.allowed_vpc_ids : "arn:aws:ec2:*:*:vpc/${vpc_id}"
         ],
     "Condition": {
         "ArnEquals": {
