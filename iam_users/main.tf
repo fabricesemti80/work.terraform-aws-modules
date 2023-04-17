@@ -1,6 +1,6 @@
 module "iam_user" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-user"
-  version = "5.16.0"
+  version = "5.17.0"
 
   for_each = var.iam_users
 
